@@ -1,42 +1,41 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Colors } from '../utils/Colors';
 
-const OnBoardingScreen2 = ({ navigation }) => {
+import images from '../../assets/images';
+import { Colors, TextSizes, Spacing, Fonts } from '../../constants';
+
+
+const OnBoardingScreen3 = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
-            <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate('Home')}>
-                <Text style={styles.skipText}>Skip</Text>
-            </TouchableOpacity>
-
             <Image
-                source={require('../assets/images/RentifyLogoPrimary.png')}
+                source={images.logo}
                 style={styles.logo}
                 resizeMode="contain"
             />
-            <Text style={styles.mainHeading}>Live in your Dream Home</Text>
+            {/* <Text style={styles.mainHeading}>Live in your Dream Home</Text> */}
 
             <Image
-                source={require('../assets/images/Buy_House_SVG.png')}
+                source={ images.onboarding3 }
                 style={styles.illustration}
                 resizeMode="contain"
             />
 
-            <Text style={styles.subHeading}>Find your new way to home</Text>
+            <Text style={styles.subHeading}>Start Your Rentify Experience</Text>
 
             <Text style={styles.paragraph}>
-                Rentify helps you find your dream home with ease. Browse listings, schedule tours, and sign leases—all in one place.
+                Whether you're a tenant searching for your next home or a landlord ready to earn, Rentify empowers you with tools that make renting easy, secure, and transparent.
             </Text>
 
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('OnBoard3')}>
-                <Text style={styles.nextText}>Next</Text>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Home')}>
+                <Text style={styles.nextText}>Explore Homes</Text>
             </TouchableOpacity>
         </View>
     );
 };
 
-export default OnBoardingScreen2;
+export default OnBoardingScreen3;
 
 const styles = StyleSheet.create({
     container: {
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
     },
     illustration: {
         width: 350,
-        height: 300,
+        height: 250,
         marginBottom: 16,
     },
     subHeading: {
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
     },
     nextButton: {
         backgroundColor: Colors.primary, // '#4F46E5'
-        paddingVertical: 12,
+        paddingVertical: 16,
         paddingHorizontal: 48,
         borderRadius: 28,
     },

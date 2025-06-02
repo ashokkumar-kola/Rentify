@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Colors } from '../utils/Colors';
 
-const OnBoardingScreen1 = ({ navigation }) => {
+import images from '../../assets/images';
+import { Colors, TextSizes, Spacing, Fonts } from '../../constants';
+
+const OnBoardingScreen2 = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
@@ -11,32 +13,32 @@ const OnBoardingScreen1 = ({ navigation }) => {
             </TouchableOpacity>
 
             <Image
-                source={require('../assets/images/RentifyLogoPrimary.png')}
+                source={images.logo}
                 style={styles.logo}
                 resizeMode="contain"
             />
-            <Text style={styles.mainHeading}>Welcome to Rentify</Text>
+            {/* <Text style={styles.mainHeading}>Live in your Dream Home</Text> */}
 
             <Image
-                source={require('../assets/images/Home_SVG.png')}
+                source={images.onboarding2}
                 style={styles.illustration}
                 resizeMode="contain"
             />
 
-            <Text style={styles.subHeading}>Find your new way to home</Text>
+            <Text style={styles.subHeading}>List. Rent. Earn.</Text>
 
             <Text style={styles.paragraph}>
-                Rentify helps you find your dream home with ease. Browse listings, schedule tours, and sign leases—all in one place.
+                Turn your property into profit with Rentify—hassle-free listings, faster tenants. —all from one convenient platform.
             </Text>
 
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('OnBoard2')}>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('OnBoard3')}>
                 <Text style={styles.nextText}>Next</Text>
             </TouchableOpacity>
         </View>
     );
 };
 
-export default OnBoardingScreen1;
+export default OnBoardingScreen2;
 
 const styles = StyleSheet.create({
     container: {

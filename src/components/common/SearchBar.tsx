@@ -3,14 +3,13 @@ import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 import LinearGradient from 'react-native-linear-gradient';
 
 import { useNavigation } from '@react-navigation/native';
 
-import { Colors } from '../utils/Colors';
-import { TextSizes } from '../utils/TextSizes';
-import { Spacing } from '../utils/Spacing';
+import { Colors } from '../../constants/Colors';
+import { TextSizes } from '../../constants/TextSizes';
+import { Spacing } from '../../constants/Spacing';
 
 const SearchBar = () => {
     const [isPressed, setIsPressed] = useState(false);
@@ -18,10 +17,11 @@ const SearchBar = () => {
 
     return (
         <Pressable
-            onPressIn={() => setIsPressed(true)}
-            onPressOut={() => setIsPressed(false)}
+            // onPressIn={() => setIsPressed(true)}
+            // onPressOut={() => setIsPressed(false)}
+            onPress={() => navigation.navigate('Filter')}
             style={({ pressed }) => [
-                styles.searchContainer,
+                styles.searchBar,
                 pressed || isPressed ? styles.activeBackground : null,
             ]}
         >
@@ -46,10 +46,10 @@ const SearchBar = () => {
 export default SearchBar;
 
 const styles = StyleSheet.create({
-    searchContainer: {
+    searchBar: {
         width: '90%',
         height: 56,
-        backgroundColor: Colors.whiteTransparentOverlay,
+        backgroundColor: Colors.white200,
         margin: Spacing.base,
         borderRadius: 28,
         borderWidth: 2,
@@ -64,6 +64,10 @@ const styles = StyleSheet.create({
         // shadowOpacity: 0.15,
         // shadowRadius: 10,
         // elevation: 6,
+  },
+
+  searchContainer: {
+    flex: 1,
   },
 
   activeBackground: {

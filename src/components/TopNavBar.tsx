@@ -5,14 +5,14 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
-    // Platform 
+    // Platform ,
 } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, DrawerActions } from '@react-navigation/native';
 
-import { Colors } from '../utils/Colors';
-import { Spacing } from '../utils/Spacing';
+import { Colors } from '../constants/Colors';
+import { Spacing } from '../constants/Spacing';
 // import { TextSizes } from '../utils/TextSizes';
 
 const TopNavBar = () => {
@@ -21,7 +21,10 @@ const TopNavBar = () => {
     return (
         <View style={styles.container}>
             {/* Menu icon */}
-            <TouchableOpacity style={styles.iconTouchable} onPress={() => {}}>
+            <TouchableOpacity
+                style={styles.iconTouchable}
+                onPress={() => navigation.navigate('DrawerStyleScreen')}
+            >
                 <FontAwesome name="bars" size={24} color={Colors.primary} />
             </TouchableOpacity>
 
@@ -52,6 +55,7 @@ export default TopNavBar;
 const styles = StyleSheet.create({
     container: {
         width: '100%',
+        minWidth: 360,
         height: 56,
         position: 'absolute',
         top: 0,
@@ -60,7 +64,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: Spacing.md,
-        backgroundColor: 'rgba(255, 255, 255, 0.4)', // 'rgba(0,0,0,0.15)'
+        backgroundColor: Colors.whiteOverlay, // 'rgba(255, 255, 255, 0.4)', // 'rgba(0,0,0,0.15)'
         // elevation: 4,
         zIndex: 999,
     },

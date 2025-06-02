@@ -11,7 +11,7 @@ import {
   Platform,
 } from 'react-native';
 
-import SearchBar from './SearchBar';
+import SearchBar from '../components/common/SearchBar';
 import TopNavBar from './TopNavBar';
 
 import { useNavigation } from '@react-navigation/native';
@@ -19,9 +19,9 @@ import { useNavigation } from '@react-navigation/native';
 import FontAwesome  from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { TextSizes } from '../utils/TextSizes';
-import { Spacing } from '../utils/Spacing';
-import { Colors } from '../utils/Colors';
+import { TextSizes } from '../constants/TextSizes';
+import { Spacing } from '../constants/Spacing';
+import { Colors } from '../constants/Colors';
 
 const Banner = () => {
     const navigation = useNavigation();
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 44,
         width: '100%',
         height: 250,
-        backgroundColor: Colors.overlay2,
+        backgroundColor: Colors.overlay,
         position: 'absolute',
         top: 0,
         left: 0,

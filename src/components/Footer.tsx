@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { Colors } from '../utils/Colors'; // Assuming you have a Colors file
-import { TextSizes } from '../utils/TextSizes';
+import { Colors } from '../constants/Colors'; // Assuming you have a Colors file
+import { TextSizes } from '../constants/TextSizes';
 
 export default function Footer() {
   const openLink = (url: string) => Linking.openURL(url);

@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, ImageBackground, TouchableOpacity } from
 
 // import Ionicons from 'react-native-vector-icons/Ionicons'; // or MaterialIcons, FontAwesome
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Colors } from '../utils/Colors';
+import { Colors } from '../constants/Colors';
 
 const PropertyCard = (
     {
@@ -48,45 +48,47 @@ const PropertyCard = (
                 </View>
             </ImageBackground>
 
-            <View style={[styles.row, styles.propertyInfo1]}>
-                <View style={[styles.column, styles.propertyTitleLoc]}>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.location}>{location}</Text>
+            <View style={styles.content}>
+                <View style={[styles.row, styles.propertyInfo1]}>
+                    <View style={[styles.column, styles.propertyTitleLoc]}>
+                        <Text style={styles.title}>{title}</Text>
+                        <Text style={styles.location}>{location}</Text>
+                    </View>
+                    <View style={[styles.column, styles.priceTag]}>
+                        <Text style={styles.price}>${price}</Text>
+                        <Text style={styles.deposit}>${deposit}</Text>
+                    </View>
                 </View>
-                <View style={[styles.column, styles.priceTag]}>
-                    <Text style={styles.price}>${price}</Text>
-                    <Text style={styles.deposit}>${deposit}</Text>
+
+                <View style={styles.divider} />
+
+                <View style={[styles.row, styles.propertyInfoContainer]}>
+                    <View style={styles.infoBox}>
+                        <MaterialIcons name="king-bed" size={24} color={Colors.primary} />
+                        <Text style={styles.infoLabel}>{bhk_type}</Text>
+                    </View>
+
+                    <View style={styles.infoBox}>
+                        <MaterialIcons name="square-foot" size={24} color={Colors.primary} />
+                        <Text style={styles.infoLabel}>{size_sqft} sqft</Text>
+                    </View>
+
+                    <View style={styles.infoBox}>
+                        <MaterialIcons name="bathtub" size={24} color={Colors.primary} />
+                        <Text style={styles.infoLabel}>
+                            {bathrooms} Baths
+                        </Text>
+                    </View>
                 </View>
+
+                <View style={styles.divider} />
+
+                <View>
+                    <Text style={{textAlign: 'center',}}>!Available for bought</Text>
+                </View>
+
+                <View style={styles.divider} />
             </View>
-
-            <View style={styles.divider} />
-
-            <View style={[styles.row, styles.propertyInfoContainer]}>
-                <View style={styles.infoBox}>
-                    <MaterialIcons name="king-bed" size={24} color={Colors.primary} />
-                    <Text style={styles.infoLabel}>{bhk_type}</Text>
-                </View>
-
-                <View style={styles.infoBox}>
-                    <MaterialIcons name="square-foot" size={24} color={Colors.primary} />
-                    <Text style={styles.infoLabel}>{size_sqft} sqft</Text>
-                </View>
-
-                <View style={styles.infoBox}>
-                    <MaterialIcons name="bathtub" size={24} color={Colors.primary} />
-                    <Text style={styles.infoLabel}>
-                        {bathrooms} Baths
-                    </Text>
-                </View>
-            </View>
-
-            <View style={styles.divider} />
-
-            <View>
-                <Text style={{textAlign: 'center',}}>!Available for bought</Text>
-            </View>
-
-            <View style={styles.divider} />
 
             <View style={styles.buttonRow}>
                 <TouchableOpacity style={[styles.button, styles.detailsButton]} onPress={() => console.log('Property details')}>
@@ -104,12 +106,14 @@ const PropertyCard = (
 
 const styles = StyleSheet.create({
     card: {
+        width: '98%',
         backgroundColor: '#fafafa',
         padding: 4,
         paddingBottom: 10,
         marginVertical: 8,
-        borderRadius: 8,
-        elevation: 3,
+        borderRadius: 16,
+        alignSelf: 'center',
+        elevation: 4,
     },
 
     image: {
@@ -143,6 +147,11 @@ const styles = StyleSheet.create({
         padding: 8,
     },
 
+    content: {
+        flex: 1,
+        paddingHorizontal: 8,
+    },
+
     row: {
         flexDirection: 'row',
         // margin: 1,
@@ -161,7 +170,7 @@ const styles = StyleSheet.create({
     },
 
     propertyTitleLoc: {
-        width: '75%',
+        width: '70%',
     },
 
     title: {
@@ -177,7 +186,7 @@ const styles = StyleSheet.create({
     },
 
     priceTag: {
-        width: '25%',
+        width: '30%',
         borderStyle: 'dashed',
         borderWidth: 1,
         borderColor: '#2ecc71',
@@ -188,6 +197,7 @@ const styles = StyleSheet.create({
         // marginBottom: 8,
         // maxWidth: 220,
         // flexShrink: 1,
+        justifyContent: 'center',
         alignItems: 'flex-end',
     },
 
@@ -214,6 +224,7 @@ const styles = StyleSheet.create({
 
     propertyInfoContainer: {
         justifyContent: 'space-evenly',
+        gap: 2,
     },
 
     value: {
@@ -231,10 +242,10 @@ const styles = StyleSheet.create({
     infoBox: {
         backgroundColor: '#dff6ff',
         paddingVertical: 8,
-        paddingHorizontal: 8,
+        // paddingHorizontal: 8,
         borderRadius: 12,
         alignItems: 'center',
-        width: 110,
+        width: 90,
         // elevation: 3,
         // shadowColor: '#000',
         // shadowOpacity: 0.1,
@@ -250,8 +261,9 @@ const styles = StyleSheet.create({
         marginTop: 16,
         borderRadius: 4,
     },
+
     button: {
-        backgroundColor: '#2b5fc0', // Blue primary
+        backgroundColor: Colors.primary, // '#2b5fc0', // Blue primary
         paddingVertical: 12,
         paddingHorizontal: 20,
         borderRadius: 16,
@@ -261,7 +273,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     buttonText: {
-        color: '#000',
+        color: Colors.primary,
         fontWeight: '600',
         fontSize: 16,
     },
@@ -271,8 +283,8 @@ const styles = StyleSheet.create({
     detailsButton: {
         backgroundColor: 'transparent', // Slightly darker blue for variation 'rgba(120, 120, 220, 0.7)'
         borderWidth: 1,
-        borderColor: '#000',
-        color: '#000',
+        borderColor: Colors.primary,
+        color: Colors.primary,
     },
 
 });

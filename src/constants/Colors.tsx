@@ -19,6 +19,7 @@ export const Colors = {
     white100: '#fafafa',
     white200: '#f5f5f5',
     white300: '#e0e0e0',
+
     whiteOverlay: '#fafafafa',
     whiteTransparentOverlay: '#ffffffcc',
 
