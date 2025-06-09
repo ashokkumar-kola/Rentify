@@ -22,11 +22,13 @@ const PropertiesScreen = () => {
 
         const response = await api.get('/properties');
 
-        if (!response.data || !response.data.properties) {
+        if (!response.data || !response.data.data) {
             throw new Error('Invalid response structure');
         }
 
-        const propertiesData = response.data.properties;
+        const { success, data, message, errors } = response.data;
+
+        const propertiesData = data;
 
         if (!Array.isArray(propertiesData)) {
             throw new Error('Expected array of properties');
@@ -49,20 +51,19 @@ const PropertiesScreen = () => {
     const renderPropertyItem = ({ item }: { item: Property }) => (
         <BuyPropertyCard
             title={item.title}
-            location="Marina District, San Francisco, CA" // {item.location_id}
-            tags= {[
-                        { label: 'Verified', color: '#4ade80' },
-                        { label: 'Pet Friendly', color: '#60a5fa' },
-                        { label: 'Furnished', color: '#c084fc' },
-                    ]} // {item.tags}
-            type= "Apartment" // {item.type}ne
-            bedrooms={item.bhk_type}
+            location={item.location.city + ', ' + item.location.locality}
+            tags= {item.amenities.map((amenity) => ({
+                label: amenity,
+                color: Colors.primary, // Default color, can be customized
+            }))}
+            type= { item.property_type }
+            bedrooms={item.bedrooms}
             bathrooms={item.bathrooms}
-            area={item.size_sqft}
+            area={item.area}
             price={item.price}
             priceType="mo"
             extraLabelLeft={{ label: 'Security Deposit', value: item.deposit }} // {item.extraLabelLeft}
-            extraLabelRight={{ label: 'Available From', value: 'June 15, 2023' }} // {item.extraLabelRight}
+            extraLabelRight={{ label: 'Available From', value: ' ' }} // {item.extraLabelRight}
             primaryLabel="Schedule Visit"
             secondaryLabel="Contact Owner"
             onPrimaryAction={() => console.log('Schedule Visit')}

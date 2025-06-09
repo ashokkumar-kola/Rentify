@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingVertical: 4,
     paddingHorizontal: 10,
-    borderRadius: 20,
+    borderRadius: 5,
   },
   priceText: {
     color: '#10b981',

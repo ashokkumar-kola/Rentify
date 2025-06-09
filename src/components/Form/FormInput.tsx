@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     color: '#222',
     fontSize: TextSizes.base,
+    fontFamily: 'Poppins-Regular',
   },
   errorContainer: {
     flexDirection: 'row',

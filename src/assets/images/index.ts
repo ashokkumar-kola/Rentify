@@ -8,7 +8,7 @@ export default {
   onboarding2: require('./Buy_House_SVG.png'),
   onboarding3: require('./search_rentify.png'),
 
-  defaultUser: require('./profiles/default.png'),
+  defaultProfileImg: require('./profiles/default.png'),
 
   defaultHome: require('./Home_SVG.png'),
 

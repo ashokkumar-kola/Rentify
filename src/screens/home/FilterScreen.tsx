@@ -44,9 +44,9 @@ const FiltersScreen = () => {
     try {
       // Prepare filter parameters
       const params = {
-        search: searchQuery || undefined,
+        location: searchQuery || undefined,
         property_type: selectedPropertyTypes.length > 0 ? selectedPropertyTypes.join(',') : undefined,
-        bhk_type: selectedBedrooms !== 'Any' ? selectedBedrooms + 'BHK' : undefined,
+        bedrooms: selectedBedrooms !== 'Any' ? selectedBedrooms + 'BHK' : undefined,
         bathrooms: selectedBathrooms !== 'Any' ? selectedBathrooms : undefined,
         amenities: selectedAmenities.length > 0 ? selectedAmenities.join(',') : undefined,
         min_price: priceRange[0],
@@ -61,6 +61,7 @@ const FiltersScreen = () => {
 
       // Make API call
       const response = await axios.get('http://localhost:3000/api/properties/filter', { params });
+      console.log('Filter API response:', response.data);
 
       // Navigate to results screen with the filtered data
     //   navigation.navigate('FilteredProperties', { properties: response.data.data });
@@ -106,7 +107,7 @@ const FiltersScreen = () => {
           <Text style={styles.priceText}>${priceRange[0]} - ${priceRange[1]}</Text>
           <Slider
             minimumValue={0}
-            maximumValue={10000}
+            maximumValue={100000}
             step={100}
             value={priceRange}
             onValueChange={value => setPriceRange(value as number[])}

@@ -7,20 +7,23 @@ import { useNavigation } from '@react-navigation/native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
+import images from '../../assets/images';
+import { Colors } from '../../constants';
+
 const SplashScreen = () => {
     const navigation = useNavigation<NavigationProp>();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('OnBoard1');
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [navigation]);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            navigation.navigate('OnBoard1');
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, [navigation]);
 
-  return (
+    return (
         <View style={styles.container}>
             <Image
-                source={require('../../assets/images/RentifyLogoPrimary.png')}
+                source={images.logo}
                 style={styles.logo}
                 resizeMode="contain"
             />
@@ -32,7 +35,7 @@ const SplashScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: Colors.white, // '#F8FAFC',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -41,11 +44,12 @@ const styles = StyleSheet.create({
         height: 60,
     },
     tagline: {
-        color: '#64748B',
+        color: Colors.primary, // '#64748B',
         fontSize: 16,
         fontWeight: '500',
         marginTop: 12,
-        letterSpacing: 4,
+        letterSpacing: 2,
+        fontFamily: 'Poppins-SemiBold',
     },
 });
 

@@ -51,7 +51,7 @@ const FilteredProperties = ({ route }) => {
     >
       <Image 
         source={require('../../assets/images/Home_SVG.png')}
-        // { uri: item.images[0] } 
+        // { uri: item.images[0] }
         style={styles.cardImage}
         resizeMode="cover"
       />
@@ -60,28 +60,28 @@ const FilteredProperties = ({ route }) => {
           <Text style={styles.cardTitle} numberOfLines={1}>{item.title}</Text>
           <Text style={styles.cardPrice}>${item.price}/mo</Text>
         </View>
-        
+
         <Text style={styles.cardDescription} numberOfLines={2}>
           {item.description}
         </Text>
-        
+
         <View style={styles.cardFeatures}>
           <View style={styles.feature}>
             <Ionicons name="bed" size={16} color={Colors.primary} />
-            <Text style={styles.featureText}>{item.bhk_type}</Text>
+            <Text style={styles.featureText}>{item.bedrooms}</Text>
           </View>
-          
+
           <View style={styles.feature}>
             <Ionicons name="water" size={16} color={Colors.primary} />
             <Text style={styles.featureText}>{item.bathrooms} Bath</Text>
           </View>
-          
+
           <View style={styles.feature}>
             <Ionicons name="resize" size={16} color={Colors.primary} />
-            <Text style={styles.featureText}>{item.size_sqft} sqft</Text>
+            <Text style={styles.featureText}>{item.area} sqft</Text>
           </View>
         </View>
-        
+
         <View style={styles.cardFooter}>
           <Text style={styles.cardType}>{item.property_type}</Text>
           <Text style={styles.cardStatus}>{item.status}</Text>

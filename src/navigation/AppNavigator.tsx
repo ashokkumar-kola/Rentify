@@ -8,19 +8,26 @@ import OnBoardingScreen1 from '../screens/onboarding/OnboardingScreen1';
 import OnBoardingScreen2 from '../screens/onboarding/OnboardingScreen2';
 import OnBoardingScreen3 from '../screens/onboarding/OnboardingScreen3';
 
-import HomeScreen from '../screens/home/HomeScreen';
-import DrawerLikeScreen from '../screens/home/DrawerLikeScreen';
-import ProfileScreen from '../screens/home/ProfileScreen';
-
 import LoginScreen from '../screens/auth/LoginScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
+
+import HomeScreen from '../screens/home/HomeScreen';
+import DrawerLikeScreen from '../screens/home/DrawerLikeScreen';
+
+import ProfileScreen from '../screens/home/ProfileScreen';
+import EditProfileScreen from '../screens/home/EditProfileScreen';
+import ChangePasswordScreen from '../screens/home/ChangePasswordScreen';
+
+import MyPropertiesScreen from '../screens/properties/MyPropertiesScreen';
 
 import FilterScreen from '../screens/home/FilterScreen';
 
 import PropertiesScreen from '../screens/properties/PropertiesScreen';
 import FilteredPropertiesScreen from '../screens/properties/FilteredProperties';
 
+import PropertyCardsScreen from '../screens/properties/PropertyCardsScreen';
 
+import TabNavigator from './TabNavigator';
 // import DrawerNavigator from './DrawerNavigator';
 
 export type RootStackParamList = {
@@ -28,7 +35,10 @@ export type RootStackParamList = {
     OnBoard1: undefined;
     OnBoard2: undefined;
     OnBoard3: undefined;
-    Home: undefined;
+
+    // Home: undefined;
+    MainTabs: undefined;
+
     Profile: undefined;
     DrawerStyleScreen: undefined
     Login: undefined;
@@ -36,6 +46,10 @@ export type RootStackParamList = {
     Filters: undefined;
     Properties: undefined;
     FilteredProperties: undefined;
+    EditProfile: undefined;
+    ChangePassword: undefined;
+    MyProperties: {userId: string} | undefined;
+    PropertyCards: undefined;
     // Main: undefined;
 };
 
@@ -66,7 +80,13 @@ const AppNavigator = () => {
                 options={{ animation: 'fade', gestureEnabled: false }}
             />
 
-            <Stack.Screen name="Home" component={HomeScreen} />
+            {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+            {/* <Stack.Screen name="MainTabs" component={TabNavigator} /> */}
+            <Stack.Screen
+                name="MainTabs"
+                component={TabNavigator}
+                options={{ gestureEnabled: false }}
+            />
 
             <Stack.Screen
                 name="DrawerStyleScreen"
@@ -77,7 +97,36 @@ const AppNavigator = () => {
                 }}
             />
 
-            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={{
+                    headerShown: true,
+                }}
+            />
+            <Stack.Screen
+                name="EditProfile"
+                component={EditProfileScreen}
+                options={{
+                    headerShown: true,
+                }}
+            />
+            <Stack.Screen
+                name="ChangePassword"
+                component={ChangePasswordScreen}
+                options={{
+                    headerShown: true,
+                }}
+            />
+
+            <Stack.Screen
+                name="MyProperties"
+                component={MyPropertiesScreen}
+                options={{
+                    headerShown: true,
+                    title: 'My Properties',
+                }}
+            />
 
             <Stack.Screen
                 name="Filters"
@@ -96,6 +145,12 @@ const AppNavigator = () => {
                 name="FilteredProperties"
                 component={FilteredPropertiesScreen}
                 options={{ title: 'Filtered Properties' }}
+            />
+
+            <Stack.Screen
+                name="PropertyCards"
+                component={PropertyCardsScreen}
+                options={{ headerShown: true, title: 'Property Cards' }}
             />
         </Stack.Navigator>
     );

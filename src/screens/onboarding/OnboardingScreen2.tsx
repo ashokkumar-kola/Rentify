@@ -1,102 +1,75 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  SafeAreaView,
+} from 'react-native';
 
 import images from '../../assets/images';
-import { Colors, TextSizes, Spacing, Fonts } from '../../constants';
+import LinearGradient from 'react-native-linear-gradient';
+import { Colors } from '../../constants/Colors';
 
-const OnBoardingScreen2 = ({ navigation }) => {
+import styles from './styles';
+
+const OnBoardingScreen2 = ({ navigation }: { navigation: any }) => {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+        {/* Skip button */}
+        <TouchableOpacity
+            style={styles.skipButton}
+            onPress={() => navigation.navigate('Home')}
+            accessibilityLabel="Skip onboarding and go to Home"
+        >
+            <Text style={styles.skipText}>Skip</Text>
+        </TouchableOpacity>
 
-            <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate('Home')}>
-                <Text style={styles.skipText}>Skip</Text>
-            </TouchableOpacity>
+        {/* Main Content */}
+        <View style={styles.content}>
+        <Image
+            source={images.logo}
+            style={styles.logo}
+            resizeMode="contain"
+            accessibilityLabel="Rentify logo"
+        />
 
-            <Image
-                source={images.logo}
-                style={styles.logo}
-                resizeMode="contain"
-            />
-            {/* <Text style={styles.mainHeading}>Live in your Dream Home</Text> */}
+        {/* Optional Main Heading */}
+        {/* <Text style={styles.mainHeading}>Live in your Dream Home</Text> */}
 
-            <Image
-                source={images.onboarding2}
-                style={styles.illustration}
-                resizeMode="contain"
-            />
+        <Image
+            source={images.onboarding2}
+            style={styles.illustration}
+            resizeMode="contain"
+            accessibilityLabel="Property earning illustration"
+        />
 
-            <Text style={styles.subHeading}>List. Rent. Earn.</Text>
+        <Text style={styles.subHeading}>List. Rent. Earn.</Text>
 
-            <Text style={styles.paragraph}>
-                Turn your property into profit with Rentify—hassle-free listings, faster tenants. —all from one convenient platform.
-            </Text>
+        <Text style={styles.paragraph}>
+            Turn your property into profit with Rentify—hassle-free listings, faster tenants—all from one convenient platform.
+        </Text>
+        </View>
 
-            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('OnBoard3')}>
+        {/* Next Button */}
+        <LinearGradient
+            colors={[Colors.blue100, Colors.blue300]}
+            style={styles.nextButton}
+            start={{ x: 0, y: 1 }}
+            end={{ x: 1, y: 1 }}
+        >
+            <TouchableOpacity
+                // style={styles.nextButton}
+                onPress={() => navigation.navigate('OnBoard3')}
+                accessibilityLabel="Go to next onboarding screen"
+            >
                 <Text style={styles.nextText}>Next</Text>
             </TouchableOpacity>
-        </View>
+        </LinearGradient>
+        </SafeAreaView>
     );
 };
 
 export default OnBoardingScreen2;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 24,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fafafa',
-    },
-    skipButton: {
-        position: 'absolute',
-        top: 40,
-        right: 24,
-    },
-    skipText: {
-        fontSize: 16,
-        color: '#888',
-    },
-    logo: {
-        width: 160,
-        height: 52,
-        marginBottom: 24,
-    },
-    mainHeading: {
-        fontSize: 28,
-        fontWeight: 'bold',
-        marginBottom: 24,
-        textAlign: 'center',
-        color: Colors.black200,
-    },
-    illustration: {
-        width: 350,
-        height: 300,
-        marginBottom: 16,
-    },
-    subHeading: {
-        fontSize: 20,
-        fontWeight: '600',
-        textAlign: 'center',
-        marginBottom: 12,
-        color: '#555',
-    },
-    paragraph: {
-        fontSize: 16,
-        textAlign: 'center',
-        color: '#666',
-        paddingHorizontal: 16,
-        marginBottom: 32,
-    },
-    nextButton: {
-        backgroundColor: Colors.primary, // '#4F46E5'
-        paddingVertical: 12,
-        paddingHorizontal: 48,
-        borderRadius: 28,
-    },
-    nextText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '600',
-    },
-});

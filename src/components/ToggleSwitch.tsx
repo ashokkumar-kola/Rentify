@@ -45,7 +45,8 @@ export default ToggleSwitch;
 const styles = StyleSheet.create({
   toggleContainer: {
     flexDirection: 'row',
-    width: '90%',
+    width: 280,
+    maxWidth: '90%',
     height: 50,
     // marginTop: 16,
     borderRadius: 25,
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     // position: 'absolute',
     // bottom: 32,
     alignSelf: 'center',
-    marginTop: 40,
+    // marginTop: 40,
   },
   buttonHalf: {
     flex: 1,
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
   activeText: {
     color: '#fff',

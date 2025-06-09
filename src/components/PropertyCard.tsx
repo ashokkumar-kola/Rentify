@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 
+import images from '../assets/images';
+
+
 // import Ionicons from 'react-native-vector-icons/Ionicons'; // or MaterialIcons, FontAwesome
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Colors } from '../constants/Colors';
@@ -12,26 +15,28 @@ const PropertyCard = (
         price,
         deposit,
         property_type,
-        bhk_type,
+        bedrooms,
         bathrooms,
-        size_sqft,
+        area,
         image,
     }
 ) => {
     return (
         <View style={styles.card}>
-            {/* <Image source={image} style={styles.image} resizeMode="contain" /> */}
+          <View style={styles.cardHeader}>
+            <Image source={images.defaultHome} style={styles.image} resizeMode="contain" />
+          </View>
 
-            <ImageBackground
+            {/* <ImageBackground
                 source={require('../assets/images/simple-home.png')}
                 style={styles.image}
                 resizeMode="contain"
                 // imageStyle={{ borderRadius: 16 }}
             >
-                <View style={ styles.propertyImgOverlay }>
-                    <Text style={ styles.propertyImgText }>
+                <View style={ styles.propertyImgOverlay }> */}
+                    {/* <Text style={ styles.propertyImgText }>
                         ! {property_type} available
-                    </Text>
+                    </Text> */}
                     {/*
                         <TouchableOpacity
                                 // onPress={() => setIsFavorite(!isFavorite)}
@@ -45,8 +50,8 @@ const PropertyCard = (
                         </TouchableOpacity>
                         <Ionicons name="heart" size={28} color="red" />
                     */}
-                </View>
-            </ImageBackground>
+                {/* </View>
+            </ImageBackground> */}
 
             <View style={styles.content}>
                 <View style={[styles.row, styles.propertyInfo1]}>
@@ -56,7 +61,7 @@ const PropertyCard = (
                     </View>
                     <View style={[styles.column, styles.priceTag]}>
                         <Text style={styles.price}>${price}</Text>
-                        <Text style={styles.deposit}>${deposit}</Text>
+                        {/* <Text style={styles.deposit}>${deposit}</Text> */}
                     </View>
                 </View>
 
@@ -65,12 +70,12 @@ const PropertyCard = (
                 <View style={[styles.row, styles.propertyInfoContainer]}>
                     <View style={styles.infoBox}>
                         <MaterialIcons name="king-bed" size={24} color={Colors.primary} />
-                        <Text style={styles.infoLabel}>{bhk_type}</Text>
+                        <Text style={styles.infoLabel}>{bedrooms} BHK</Text>
                     </View>
 
                     <View style={styles.infoBox}>
                         <MaterialIcons name="square-foot" size={24} color={Colors.primary} />
-                        <Text style={styles.infoLabel}>{size_sqft} sqft</Text>
+                        <Text style={styles.infoLabel}>{area} sqft</Text>
                     </View>
 
                     <View style={styles.infoBox}>
@@ -81,23 +86,23 @@ const PropertyCard = (
                     </View>
                 </View>
 
-                <View style={styles.divider} />
+                {/* <View style={styles.divider} />
 
                 <View>
                     <Text style={{textAlign: 'center',}}>!Available for bought</Text>
                 </View>
 
-                <View style={styles.divider} />
+                <View style={styles.divider} /> */}
             </View>
 
-            <View style={styles.buttonRow}>
+            {/* <View style={styles.buttonRow}>
                 <TouchableOpacity style={[styles.button, styles.detailsButton]} onPress={() => console.log('Property details')}>
                     <Text style={styles.buttonText}>Details</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => console.log('Owner Details')}>
                     <Text style={styles.buttonText, styles.ContactButton}>Contact Owner</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
 
 
         </View>
@@ -106,19 +111,21 @@ const PropertyCard = (
 
 const styles = StyleSheet.create({
     card: {
-        width: '98%',
+        width: 250, // '75%',
         backgroundColor: '#fafafa',
         padding: 4,
         paddingBottom: 10,
         marginVertical: 8,
+        marginHorizontal: 8,
         borderRadius: 16,
         alignSelf: 'center',
         elevation: 4,
+        zIndex: 10,
     },
 
     image: {
         width: '100%',
-        height: 180,
+        height: 130,
         borderRadius: 8,
         marginBottom: 8,
     },
@@ -166,7 +173,7 @@ const styles = StyleSheet.create({
 
     propertyInfo1: {
         justifyContent: 'space-between',
-        marginBottom: 8,
+        // marginBottom: 8,
     },
 
     propertyTitleLoc: {
@@ -174,23 +181,23 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: '700',
         marginBottom: 2,
     },
 
     location: {
-        fontSize: 14,
+        fontSize: 12,
         color: '#555',
         // marginBottom: 2,
     },
 
     priceTag: {
-        width: '30%',
+        width: '32%',
         borderStyle: 'dashed',
         borderWidth: 1,
         borderColor: '#2ecc71',
-        padding: 8,
+        paddingHorizontal: 8,
         borderRadius: 8,
         // backgroundColor: '#eafaf1',
         // marginTop: 8,
@@ -202,14 +209,14 @@ const styles = StyleSheet.create({
     },
 
     price: {
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 'bold',
         color: '#27ae60',
         marginBottom: 2,
     },
 
     deposit: {
-        fontSize: 14,
+        fontSize: 12,
         color: '#555',
     },
 
@@ -217,19 +224,21 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         width: 90,
     },
-
+    infoLabel: {
+            fontSize: 12,
+    },
     propertyinfo2: {
         justifyContent: 'space-evenly',
     },
 
     propertyInfoContainer: {
         justifyContent: 'space-evenly',
-        gap: 2,
+        gap: 8,
     },
 
     value: {
-        width: 120,
-        height: 60,
+        width: 80,
+        height: 40,
         backgroundColor: 'skyblue',
         color: '#333',
         padding: 8,
@@ -245,7 +254,7 @@ const styles = StyleSheet.create({
         // paddingHorizontal: 8,
         borderRadius: 12,
         alignItems: 'center',
-        width: 90,
+        width: '30%',
         // elevation: 3,
         // shadowColor: '#000',
         // shadowOpacity: 0.1,

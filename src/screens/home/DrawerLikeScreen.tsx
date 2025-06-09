@@ -15,37 +15,43 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Colors } from '../../constants';
 
 import { api } from '../../api/apiClient';
+import { decodeJwt } from '../../utils/jwt';
 
 const DrawerLikeScreen = () => {
   const navigation = useNavigation();
-  const [user, setUser] = useState(null);
+//   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const userToken = await AsyncStorage.getItem('userData');
-        let parsedUser = null;
 
-        if (userToken) {
-          parsedUser = JSON.parse(userToken);
-          setUser(parsedUser);
+useEffect(() => {
+  const getUserDataFromToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem('authToken');
+      console.log('User token:', token);
 
-          const response = await api.get(`/user/find/${parsedUser._id}`);
+      if (token) {
+        const decoded = decodeJwt(token);
+        console.log('Decoded token:', decoded);
+
+        if (decoded?.id) {
+          const response = await api.get(`/users/${decoded.id}`);
+
           if (response.data.success) {
-            setUserData(response.data.user);
+            setUserData(response.data.data);
+            console.log('User Data:', userData);
           }
         }
-      } catch (error) {
-        console.error('Error getting user data:', error);
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (error) {
+      console.error('Error decoding token or fetching user:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    getUserData();
-  }, []);
+  getUserDataFromToken();
+}, []);
 
   const handleLogout = async () => {
   try {
@@ -93,22 +99,23 @@ const DrawerLikeScreen = () => {
       <ScrollView contentContainerStyle={styles.scrollArea}>
         <View style={styles.profileSection}>
           <FontAwesome name="user-circle" size={60} color="#666" />
-          <Text style={styles.name}>{userData?.user_name || 'User'}</Text>
+          <Text style={styles.name}>{userData?.full_name || 'User'}</Text>
           {/* <Text style={styles.subName}>{userData?.lastName || ''}</Text> */}
         </View>
 
         <View style={styles.menuList}>
           {[
-            { label: 'My profile', icon: 'user', route: 'Profile' },
-            { label: 'My address', icon: 'map-marker', route: 'Address' },
-            { label: 'My properties', icon: 'home', route: 'Properties' },
-            { label: 'My Rentals', icon: 'building', route: 'Rentals' },
-            { label: 'My Documents', icon: 'file-text', route: 'Documents' },
-            { label: 'Help center', icon: 'question-circle', route: 'Help' },
-            { label: 'Setting', icon: 'cog', route: 'Settings' },
-            { label: 'Privacy policy', icon: 'shield', route: 'Privacy' },
+            { label: 'My profile', icon: 'user', route: 'Profile', routeParams: undefined },
+            { label: 'My address', icon: 'map-marker', route: 'Address', routeParams: undefined },
+            { label: 'My properties', icon: 'home', route: 'MyProperties', routeParams: { userId: userData?._id } },
+            { label: 'My Rentals', icon: 'building', route: 'Rentals', routeParams: undefined },
+            { label: 'My Documents', icon: 'file-text', route: 'Documents', routeParams: undefined },
+            { label: 'Property cards', icon: 'th-large', route: 'PropertyCards', routeParams: undefined },
+            { label: 'Help center', icon: 'question-circle', route: 'Help', routeParams: undefined },
+            { label: 'Setting', icon: 'cog', route: 'Settings', routeParams: undefined },
+            { label: 'Privacy policy', icon: 'shield', route: 'Privacy', routeParams: undefined },
           ].map((item, index) => (
-            <TouchableOpacity key={index} style={styles.menuItem} onPress={() => navigation.navigate(item.route)}>
+            <TouchableOpacity key={index} style={styles.menuItem} onPress={() => navigation.navigate(item.route, item.routeParams)}>
               <FontAwesome name={item.icon} size={20} color="#333" />
               <Text style={styles.menuText}>{item.label}</Text>
             </TouchableOpacity>
